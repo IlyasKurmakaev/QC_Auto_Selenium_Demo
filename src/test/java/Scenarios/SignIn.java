@@ -36,7 +36,7 @@ public class SignIn extends ScenarioSettings {
     @Test
     @ArtifactId(artifactId = 2)
     public void signInWrongUserName() { //кейс - неверный логин
-        int id = getArtifactIdFromMethod(this.getClass(), "signInWrongLogin");
+        int id = getArtifactIdFromMethod(this.getClass(), "signInWrongUserName");
         User user = new UserManager().getUserById(id);
 
         SignInPage signInPage = PageFactory.initElements(driver, SignInPage.class);

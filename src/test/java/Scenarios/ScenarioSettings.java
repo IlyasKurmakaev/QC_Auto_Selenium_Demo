@@ -16,8 +16,8 @@ public abstract class ScenarioSettings {
 
     private final String driverDirectory = "./src/test/resources/drivers/chromedriver.exe";
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     @BeforeSuite
     public void setUp() {
