@@ -9,7 +9,7 @@ public class User {
         this.password = password;
     }
 
-    public String getLogin() {
+    public String getUserName() {
         return login;
     }
 

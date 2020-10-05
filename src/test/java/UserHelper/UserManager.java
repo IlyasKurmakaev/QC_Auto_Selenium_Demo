@@ -1,12 +1,12 @@
 package UserHelper;
 
-import DateBaseHelper.DataBaseManager;
+import FileManager.FileManager;
 
 public class UserManager {
     public User getUserById(int id) {
-        DataBaseManager dbManager = new DataBaseManager();
-        String userName = dbManager.getUserName(id);
-        String password = dbManager.getPassword(id);
+        FileManager fileManager = new FileManager();
+        String userName = fileManager.getUserName(id);
+        String password = fileManager.getPassword(id);
         User userRes = new User(userName, password);
         return userRes;
     }

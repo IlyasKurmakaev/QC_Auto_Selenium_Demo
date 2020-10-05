@@ -1,3 +1,5 @@
+package Scenarios;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,12 +12,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
-public class ScenarioSettings {
+public abstract class ScenarioSettings {
 
     private final String driverDirectory = "./src/test/resources/drivers/chromedriver.exe";
 
-    public WebDriver driver;
-    public WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     @BeforeSuite
     public void setUp() {
@@ -26,11 +28,6 @@ public class ScenarioSettings {
 
     @AfterSuite
     public void closeBrowser() {
-//        try {
-//            Thread.sleep(10 * 1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         driver.quit();
     }
 
