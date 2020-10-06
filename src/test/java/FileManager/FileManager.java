@@ -3,23 +3,24 @@ package FileManager;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class FileManager {
+    private FileManager(){};
     private final String filePath = "./src/test/resources/IdClientBase.txt";
 
-    public String getUserName(int id) {
-        return clientFields(id).get(UserFields.USER_NAME);
+    private static FileManager fileManager;
+
+    public static FileManager getInstance() { // ленивая инициализация
+        if (fileManager == null) {
+            fileManager = new FileManager();
+            return fileManager;
+        } else {
+            return fileManager;
+        }
     }
 
-    public String getPassword(int id) {
-        return clientFields(id).get(UserFields.PASSWORD);
-    }
-
-    private Map<UserFields, String> clientFields(int id) {
-        Map<UserFields, String> res = new HashMap<UserFields, String>();
+    public String[] getClientsFieldById(int id) { // что-то вроде десереализатора
         FileReader fr= null;
         try {
             fr = new FileReader(filePath);
@@ -28,13 +29,13 @@ public class FileManager {
         }
         Scanner scan = new Scanner(fr);
         String tempStr;
-        String[] arrStr;
+        String[] arrStr = new String[0];
+
         while (scan.hasNextLine()) {
             tempStr = scan.nextLine();
             arrStr = tempStr.split(" ");
             if (Integer.parseInt(arrStr[0]) == id) {
-                res.put(UserFields.USER_NAME, arrStr[1]);
-                res.put(UserFields.PASSWORD, arrStr[2]);
+                break;
             }
         }
 
@@ -44,11 +45,9 @@ public class FileManager {
             e.printStackTrace();
         }
 
-        return res;
-    }
-
-    private enum UserFields {
-        USER_NAME,
-        PASSWORD
+        if (arrStr.length == 0 ) {
+            new RuntimeException("Пользователем с id \"" + id + " не найден");
+        }
+        return arrStr;
     }
 }
