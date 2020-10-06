@@ -248,11 +248,6 @@ public class SignIn extends ScenarioSettings {
         signInPage.pressSubmit();
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         Assert.assertTrue(homePage.checkSuccessLoading(), "Домашняя страница загрузилась");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         signInPage.open();
         Assert.assertTrue(homePage.checkSuccessLoading(), "Домашняя страница загрузилась");
 
